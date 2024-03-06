@@ -3,9 +3,13 @@ const path = require("path");
 
 module.exports = {
   mode: "none",
-  entry: "./src/app/scripts/index.js",
+  entry: {
+    login: "./src/app/scripts/index.js",
+    register: "./src/app/scripts/register.js",
+    wsp: "./src/app/scripts/wsp.js",
+  },
   output: {
-    filename: "bundle.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
   },
   module: {
@@ -28,6 +32,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+      filename: "index.html",
       minify: {
         collapseWhitespace: true,
         removeComments: true,
@@ -36,6 +41,33 @@ module.exports = {
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: true,
       },
+      chunks: ["login"],
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/pages/register.html",
+      filename: "pages/register.html",
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      },
+      chunks: ["register"],
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/pages/wsp.html",
+      filename: "pages/wsp.html",
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      },
+      chunks: ["wsp"],
     }),
   ],
 };
